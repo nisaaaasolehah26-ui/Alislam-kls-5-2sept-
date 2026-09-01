@@ -1,259 +1,533 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kuis Interaktif</title>
-<style>
-  :root {
-    --primary: #2563eb;
-    --primary-soft: #dbeafe;
-    --success: #16a34a;
-    --danger: #dc2626;
-    --text: #1f2937;
-    --bg: #f9fafb;
-  }
+<html style="margin:0;padding:0;">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+(function(){
+  var s = document.createElement('style');
+  s.textContent = ':root{--bg:#faf9f4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#297a2e;--accent-soft:rgba(41,122,46,.14);--accent2:#d97706;--accent2-soft:rgba(217,119,6,.14);--border:rgba(15,23,42,.08)}.reveal{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}.reveal:nth-child(2){animation-delay:.1s}.reveal:nth-child(3){animation-delay:.2s}.reveal:nth-child(4){animation-delay:.3s}.reveal:nth-child(5){animation-delay:.4s}.reveal:nth-child(6){animation-delay:.5s}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.option-btn{transition:all .25s cubic-bezier(.4,0,.2,1)}.option-btn:hover:not(:disabled){background:var(--accent-soft);border-color:var(--accent)}.option-btn.selected{background:#dcfce7 !important;border-color:#16a34a !important;color:#166534 !important;font-weight:700 !important;transform:scale(1.02);box-shadow:0 4px 12px rgba(22,163,74,.25)}.option-btn:active{transform:scale(.98)}.option-btn.correct{background:#dcfce7;border-color:#16a34a;color:#166534}.option-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}.materi-card{transition:transform .25s ease,box-shadow .25s ease}.materi-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08)}';
+  document.head.appendChild(s);
+})();
+</script>
+<div style="background-color:transparent;box-sizing:border-box;">
+  <div style="color:var(--text);font-family:'Fredoka',sans-serif;background:var(--bg)">
+    <div class="max-w-4xl mx-auto px-5 py-10">
 
-  body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-  }
+      <!-- HERO / JUDUL -->
+      <div class="reveal mb-10 text-center">
+        <div style="display:inline-flex;align-items:center;gap:12px;margin-bottom:14px;padding:8px 18px;border-radius:999px;background:var(--accent-soft);border:1px solid var(--accent)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          <span style="color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.05em">Pendidikan Agama Islam · Kelas 5 SD</span>
+        </div>
+        <h1 class="text-4xl font-bold mb-3" style="color:var(--text);line-height:1.2">
+          Belajar <span style="background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">Asmaul Husna</span>
+        </h1>
+        <p style="color:var(--muted);max-width:560px;margin:0 auto;font-size:15px">Mengenal nama-nama indah Allah SWT, memahami maknanya, dan menghayati hikmah dalam kehidupan sehari-hari</p>
+      </div>
 
-  .container {
-    max-width: 800px;
-    width: 100%;
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-  }
+      <!-- MATERI PEMBELAJARAN -->
+      <div class="reveal mb-10">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold" style="color:var(--text)">Materi Pembelajaran</h2>
+        </div>
 
-  h1 { text-align: center; color: var(--primary); margin-bottom: 10px; }
-  
-  .input-group { margin-bottom: 20px; }
-  .input-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-  .input-group input {
-    width: 100%; padding: 12px; border: 2px solid #e5e7eb; 
-    border-radius: 8px; font-size: 16px; box-sizing: border-box;
-  }
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-  .btn {
-    padding: 12px 24px; border: none; border-radius: 8px; 
-    font-size: 16px; font-weight: 600; cursor: pointer; 
-    transition: all 0.2s;
-  }
-  .btn-primary { background: var(--primary); color: white; }
-  .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
-  .btn:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
+          <!-- Kartu 1: Al-Qawiyy -->
+          <div class="materi-card rounded-2xl p-5" style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--accent)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <span style="display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600">1</span>
+                <h3 class="text-lg font-bold mt-2" style="color:var(--text)">Al-Qawiyy</h3>
+                <p style="color:var(--accent2);font-weight:600;font-size:14px">Yang Maha Kuat</p>
+              </div>
+              <div style="font-size:28px;font-weight:700;color:var(--accent);direction:rtl">الْقَوِيُّ</div>
+            </div>
+            <p style="color:var(--text);font-size:14px;line-height:1.6;margin-bottom:10px"><strong>Makna:</strong> Allah memiliki kekuatan yang tak terbatas, luar biasa, dan tak terkalahkan oleh apa pun di dunia ini.</p>
+            <div style="background:var(--accent2-soft);border-radius:10px;padding:10px 12px">
+              <p style="color:var(--text);font-size:13px;font-weight:600;margin-bottom:4px">Hikmah:</p>
+              <ul style="color:var(--text);font-size:13px;margin:0;padding-left:16px;line-height:1.5">
+                <li>Selalu memohon pertolongan kepada Allah saat menghadapi kesulitan</li>
+                <li>Memberikan keberanian dalam menghadapi berbagai rintangan</li>
+                <li>Tidak menyalahgunakan kekuatan untuk bersikap semena-mena</li>
+              </ul>
+            </div>
+          </div>
 
-  .option-btn {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 15px 20px;
-    margin: 10px 0;
-    background: #f3f4f6;
-    border: 2px solid #e5e7eb;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+          <!-- Kartu 2: Al-Qayyum -->
+          <div class="materi-card rounded-2xl p-5" style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--accent)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <span style="display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600">2</span>
+                <h3 class="text-lg font-bold mt-2" style="color:var(--text)">Al-Qayyūm</h3>
+                <p style="color:var(--accent2);font-weight:600;font-size:14px">Yang Maha Berdiri Sendiri</p>
+              </div>
+              <div style="font-size:28px;font-weight:700;color:var(--accent);direction:rtl">الْقَيُّومُ</div>
+            </div>
+            <p style="color:var(--text);font-size:14px;line-height:1.6;margin-bottom:10px"><strong>Makna:</strong> Allah Maha Hidup dan berdiri sendiri tanpa membutuhkan bantuan siapa pun. Allah terus-menerus mengurus dan menjaga alam semesta tanpa pernah mengantuk atau tidur.</p>
+            <div style="background:var(--accent2-soft);border-radius:10px;padding:10px 12px">
+              <p style="color:var(--text);font-size:13px;font-weight:600;margin-bottom:4px">Hikmah:</p>
+              <ul style="color:var(--text);font-size:13px;margin:0;padding-left:16px;line-height:1.5">
+                <li>Mengingatkan bahwa hidup memiliki tujuan yang harus diisi hal positif</li>
+                <li>Tindakan sehari-hari harus mencerminkan kebenaran dan keadilan</li>
+                <li>Melatih sikap mandiri dan tidak selalu bergantung pada orang lain</li>
+              </ul>
+            </div>
+          </div>
 
-  .option-btn:hover {
-    background: #e5e7eb;
-    border-color: #d1d5db;
-  }
+          <!-- Kartu 3: Al-Muhyiy -->
+          <div class="materi-card rounded-2xl p-5" style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--accent)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <span style="display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600">3</span>
+                <h3 class="text-lg font-bold mt-2" style="color:var(--text)">Al-Muhyiy</h3>
+                <p style="color:var(--accent2);font-weight:600;font-size:14px">Yang Maha Menghidupkan</p>
+              </div>
+              <div style="font-size:28px;font-weight:700;color:var(--accent);direction:rtl">الْمُحْيِي</div>
+            </div>
+            <p style="color:var(--text);font-size:14px;line-height:1.6;margin-bottom:10px"><strong>Makna:</strong> Allah yang memberi kehidupan kepada seluruh makhluk, menjaga kehidupan melalui rezeki, serta memberikan kebahagiaan dan kedamaian di dalam hati.</p>
+            <div style="background:var(--accent2-soft);border-radius:10px;padding:10px 12px">
+              <p style="color:var(--text);font-size:13px;font-weight:600;margin-bottom:4px">Hikmah:</p>
+              <ul style="color:var(--text);font-size:13px;margin:0;padding-left:16px;line-height:1.5">
+                <li>Mensyukuri anugerah hidup yang telah diberikan Allah</li>
+                <li>Memanfaatkan hidup dengan berbuat baik kepada sesama</li>
+                <li>Menjaga dan menyayangi ciptaan Allah lainnya</li>
+              </ul>
+            </div>
+          </div>
 
-  .option-btn.selected {
-    background-color: var(--primary-soft) !important;
-    border-color: var(--primary) !important;
-    color: #1e3a8a !important;
-    font-weight: 700 !important;
-    transform: scale(1.02);
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-  }
+          <!-- Kartu 4: Al-Mumit -->
+          <div class="materi-card rounded-2xl p-5" style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--accent)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <span style="display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600">4</span>
+                <h3 class="text-lg font-bold mt-2" style="color:var(--text)">Al-Mumīt</h3>
+                <p style="color:var(--accent2);font-weight:600;font-size:14px">Yang Maha Mematikan</p>
+              </div>
+              <div style="font-size:28px;font-weight:700;color:var(--accent);direction:rtl">الْمُمِيتُ</div>
+            </div>
+            <p style="color:var(--text);font-size:14px;line-height:1.6;margin-bottom:10px"><strong>Makna:</strong> Allah memiliki kekuasaan mutlak atas kematian dan menentukan waktu kematian setiap makhluk hidup.</p>
+            <div style="background:var(--accent2-soft);border-radius:10px;padding:10px 12px">
+              <p style="color:var(--text);font-size:13px;font-weight:600;margin-bottom:4px">Hikmah:</p>
+              <ul style="color:var(--text);font-size:13px;margin:0;padding-left:16px;line-height:1.5">
+                <li>Menyadari bahwa kehidupan di dunia ini bersifat sementara</li>
+                <li>Menyiapkan diri untuk akhirat dengan rajin beribadah</li>
+                <li>Menjaga hubungan baik dengan Allah dan sesama manusia</li>
+              </ul>
+            </div>
+          </div>
 
-  .option-btn:active {
-    transform: scale(0.98);
-  }
+          <!-- Kartu 5: Al-Ba'is -->
+          <div class="materi-card rounded-2xl p-5 md:col-span-2" style="background:var(--card);border:1px solid var(--border);border-top:4px solid var(--accent)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+              <div>
+                <span style="display:inline-block;padding:2px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:600">5</span>
+                <h3 class="text-lg font-bold mt-2" style="color:var(--text)">Al-Bā'is</h3>
+                <p style="color:var(--accent2);font-weight:600;font-size:14px">Yang Maha Membangkitkan</p>
+              </div>
+              <div style="font-size:28px;font-weight:700;color:var(--accent);direction:rtl">الْبَاعِثُ</div>
+            </div>
+            <p style="color:var(--text);font-size:14px;line-height:1.6;margin-bottom:10px"><strong>Makna:</strong> Allah yang membangkitkan kembali manusia dari alam kubur setelah meninggal dunia pada hari kiamat kelak.</p>
+            <div style="background:var(--accent2-soft);border-radius:10px;padding:10px 12px">
+              <p style="color:var(--text);font-size:13px;font-weight:600;margin-bottom:4px">Hikmah:</p>
+              <ul style="color:var(--text);font-size:13px;margin:0;padding-left:16px;line-height:1.5">
+                <li>Giat berbuat kebaikan karena percaya setiap amal akan dihitung dan dibalas</li>
+                <li>Segera bertaubat dan memohon ampunan jika melakukan kesalahan</li>
+                <li>Menanamkan harapan mendapatkan kehidupan indah di akhirat kelak</li>
+              </ul>
+            </div>
+          </div>
 
-  .status-box {
-    padding: 15px; border-radius: 8px; margin-top: 20px; 
-    border: 2px solid #e5e7eb; text-align: center;
-    transition: all 0.3s;
-  }
-  
-  .hidden { display: none; }
-</style>
-</head>
-<body>
+        </div>
+      </div>
 
-<div class="container">
-  <h1>📝 Kuis Interaktif</h1>
-  
-  <div id="formNama" class="input-group">
-    <label for="namaSiswa">Masukkan Nama Lengkap:</label>
-    <input type="text" id="namaSiswa" placeholder="Contoh: Budi Santoso">
-    <button class="btn btn-primary" onclick="mulaiKuis()" style="margin-top:10px; width:100%;">Mulai Kuis</button>
-  </div>
+      <!-- FORM NAMA SISWA -->
+      <div class="reveal mb-10 rounded-2xl p-6" style="background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--accent2-soft);display:flex;align-items:center;justify-content:center;color:var(--accent2);flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold" style="color:var(--text)">Identitas Siswa</h2>
+        </div>
+        <label style="display:block;color:var(--text);font-weight:500;margin-bottom:8px;font-size:14px">Nama Lengkap</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input id="namaSiswa" type="text" placeholder="Tuliskan nama lengkapmu..." style="flex:1 1 240px;min-width:200px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Fredoka',sans-serif;font-size:15px;outline:none" oninput="checkNama()">
+          <button id="btnMulai" onclick="mulaiKuis()" disabled style="padding:12px 28px;border-radius:12px;font-weight:600;font-size:15px;cursor:not-allowed;background:rgba(128,128,128,.12);color:var(--muted);border:1px solid var(--border);font-family:'Fredoka',sans-serif">
+            Mulai Kuis
+          </button>
+        </div>
+        <p id="pesanNama" style="color:var(--muted);font-size:13px;margin-top:8px">Isi namamu terlebih dahulu untuk memulai kuis</p>
+      </div>
 
-  <div id="areaKuis" class="hidden">
-    <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-      <span id="progressTeks" style="font-weight:600;">Soal 1 dari 3</span>
-      <span id="namaDisplay" style="color:#6b7280;"></span>
+      <!-- KUIS SECTION -->
+      <div id="kuisSection" class="reveal" style="display:none">
+        <div class="rounded-2xl p-6 mb-6" style="background:var(--card);border:2px solid var(--accent);box-shadow:0 0 0 3px var(--accent-soft)">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 11l3 3L22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold" style="color:var(--text)">Kuis Asmaul Husna</h2>
+                <p style="color:var(--muted);font-size:13px">Untuk: <strong id="tampilNama" style="color:var(--accent)">-</strong></p>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <p style="color:var(--muted);font-size:12px">Soal</p>
+              <p style="font-size:22px;font-weight:700;color:var(--accent)"><span id="soalKe">0</span>/10</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:8px;background:var(--border);border-radius:999px;margin-bottom:20px;overflow:hidden">
+          <div id="progressBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width .3s ease"></div>
+        </div>
+
+        <div id="wadahSoal"></div>
+
+        <div style="display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap">
+          <button id="btnPrev" onclick="soalSebelumnya()" disabled style="padding:12px 22px;border-radius:12px;font-weight:600;font-size:14px;cursor:not-allowed;background:var(--card);color:var(--muted);border:1px solid var(--border);font-family:'Fredoka',sans-serif">
+            ← Sebelumnya
+          </button>
+          <button id="btnNext" onclick="soalBerikutnya()" style="padding:12px 22px;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer;background:var(--accent-soft);color:var(--text);border:1px solid var(--accent);font-family:'Fredoka',sans-serif">
+            Selanjutnya →
+          </button>
+          <button id="btnKumpul" onclick="kumpulkanJawaban()" style="display:none;padding:12px 26px;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer;background:var(--accent);color:#fff;border:1px solid var(--accent);font-family:'Fredoka',sans-serif">
+            Kumpulkan Jawaban
+          </button>
+        </div>
+      </div>
+
+      <!-- HASIL SECTION -->
+      <div id="hasilSection" class="reveal" style="display:none">
+        <div class="rounded-2xl p-8 mb-6 text-center" style="background:var(--card);border:2px solid var(--accent);box-shadow:0 4px 20px var(--accent-soft)">
+          <div style="width:80px;height:80px;border-radius:50%;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent);margin:0 auto 16px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 11l3 3L22 4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold mb-2" style="color:var(--text)">Kuis Selesai!</h2>
+          <p style="color:var(--muted);margin-bottom:20px">Hasil jawaban <strong id="hasilNama" style="color:var(--accent)">-</strong></p>
+          <div style="display:inline-block;padding:20px 40px;border-radius:16px;background:var(--accent-soft);border:1px solid var(--accent)">
+            <p style="color:var(--muted);font-size:14px;margin-bottom:4px">Nilai Kamu</p>
+            <p id="nilaiAkhir" style="font-size:56px;font-weight:700;color:var(--accent);line-height:1">0</p>
+            <p id="keteranganNilai" style="color:var(--text);font-weight:600;margin-top:6px">-</p>
+          </div>
+          <div style="display:flex;justify-content:center;gap:30px;margin-top:20px;flex-wrap:wrap">
+            <div>
+              <p style="color:var(--muted);font-size:13px">Benar</p>
+              <p id="jmlBenar" style="font-size:24px;font-weight:700;color:#16a34a">0</p>
+            </div>
+            <div>
+              <p style="color:var(--muted);font-size:13px">Salah</p>
+              <p id="jmlSalah" style="font-size:24px;font-weight:700;color:#dc2626">0</p>
+            </div>
+            <div>
+              <p style="color:var(--muted);font-size:13px">Tidak Terjawab</p>
+              <p id="jmlKosong" style="font-size:24px;font-weight:700;color:var(--muted)">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-2xl p-6 mb-6" style="background:var(--card);border:1px solid var(--border)">
+          <h3 class="text-lg font-bold mb-4" style="color:var(--text)">Pembahasan Jawaban</h3>
+          <div id="pembahasan"></div>
+        </div>
+
+        <div id="statusKirim" class="rounded-2xl p-4 text-center" style="background:var(--accent-soft);border:1px solid var(--accent)">
+          <p style="color:var(--accent);font-weight:600;font-size:14px">
+            <span id="statusTeks">Mengirim hasil ke spreadsheet guru...</span>
+          </p>
+        </div>
+
+        <div style="text-align:center;margin-top:16px">
+          <button onclick="location.reload()" style="padding:12px 26px;border-radius:12px;font-weight:600;font-size:14px;cursor:pointer;background:var(--card);color:var(--text);border:1px solid var(--border);font-family:'Fredoka',sans-serif">
+            Coba Lagi
+          </button>
+        </div>
+      </div>
+
     </div>
-    
-    <h2 id="pertanyaanTeks" style="margin-bottom:20px;"></h2>
-    <div id="pilihanJawaban"></div>
-    
-    <div style="display:flex; gap:10px; margin-top:20px;">
-      <button class="btn btn-primary" id="btnPrev" onclick="navigasi(-1)" disabled>← Sebelumnya</button>
-      <button class="btn btn-primary" id="btnNext" onclick="navigasi(1)">Selanjutnya →</button>
-      <button class="btn btn-primary hidden" id="btnSelesai" onclick="selesaiKuis()" style="background:#16a34a;">Selesai & Kirim</button>
-    </div>
-  </div>
-
-  <div id="statusKirim" class="status-box hidden">
-    <p id="statusTeks" style="margin:0; font-weight:600;">Mengirim hasil...</p>
   </div>
 </div>
 
 <script>
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzMJBl1AR2cybR1nH_6hCZYMWKR57mmMWi0c-wWrIyraEsZOb1M0DUPsD1O_j0j38h_/exec';
+// ==== DATA SOAL ====
+var soalList = [
+  {
+    t: "1. Asmaul Husna 'Al-Qawiyy' memiliki arti...",
+    o: ["A. Yang Maha Pengasih", "B. Yang Maha Kuat", "C. Yang Maha Melihat", "D. Yang Maha Mendengar"],
+    k: 1,
+    p: "Al-Qawiyy artinya Yang Maha Kuat. Allah memiliki kekuatan yang tak terbatas dan tak terkalahkan."
+  },
+  {
+    t: "2. Nama Allah yang berarti 'Yang Maha Berdiri Sendiri' adalah...",
+    o: ["A. Al-Qayyūm", "B. Al-Muhyiy", "C. Al-Mumīt", "D. Al-Bā'is"],
+    k: 0,
+    p: "Al-Qayyūm artinya Yang Maha Berdiri Sendiri. Allah berdiri sendiri tanpa membutuhkan bantuan siapa pun."
+  },
+  {
+    t: "3. Allah yang memberi kehidupan kepada seluruh makhluk adalah makna dari...",
+    o: ["A. Al-Mumīt", "B. Al-Bā'is", "C. Al-Muhyiy", "D. Al-Qawiyy"],
+    k: 2,
+    p: "Al-Muhyiy artinya Yang Maha Menghidupkan. Allah yang memberi kehidupan dan menjaganya melalui rezeki."
+  },
+  {
+    t: "4. 'Al-Mumīt' memiliki arti...",
+    o: ["A. Yang Maha Menghidupkan", "B. Yang Maha Membangkitkan", "C. Yang Maha Mematikan", "D. Yang Maha Kuat"],
+    k: 2,
+    p: "Al-Mumīt artinya Yang Maha Mematikan. Allah memiliki kekuasaan mutlak atas kematian setiap makhluk."
+  },
+  {
+    t: "5. Allah yang membangkitkan kembali manusia dari alam kubur pada hari kiamat adalah makna dari...",
+    o: ["A. Al-Bā'is", "B. Al-Qayyūm", "C. Al-Muhyiy", "D. Al-Mumīt"],
+    k: 0,
+    p: "Al-Bā'is artinya Yang Maha Membangkitkan. Allah akan membangkitkan manusia pada hari kiamat kelak."
+  },
+  {
+    t: "6. Hikmah mempelajari Al-Qawiyy yang benar adalah...",
+    o: ["A. Kita menjadi sombong dan merasa paling hebat", "B. Kita berani menyalahgunakan kekuatan", "C. Kita selalu memohon pertolongan Allah saat menghadapi kesulitan", "D. Kita tidak perlu berusaha karena Allah yang kuat"],
+    k: 2,
+    p: "Hikmah Al-Qawiyy: memohon pertolongan Allah saat kesulitan, berani menghadapi rintangan, dan tidak menyalahgunakan kekuatan."
+  },
+  {
+    t: "7. Perilaku yang mencerminkan hikmah Al-Qayyūm adalah...",
+    o: ["A. Selalu bergantung pada orang lain dalam segala hal", "B. Melatih sikap mandiri dan bertanggung jawab", "C. Tidur sepanjang hari tanpa beraktivitas", "D. Mengabaikan kewajiban sehari-hari"],
+    k: 1,
+    p: "Hikmah Al-Qayyūm (Yang Maha Berdiri Sendiri): melatih sikap mandiri, hidup diisi hal positif, dan selalu bersikap benar serta adil."
+  },
+  {
+    t: "8. Berikut ini yang BUKAN hikmah dari Al-Muhyiy adalah...",
+    o: ["A. Mensyukuri anugerah hidup", "B. Berbuat baik kepada sesama", "C. Menjaga dan menyayangi ciptaan Allah", "D. Menghambur-hamburkan waktu dengan sia-sia"],
+    k: 3,
+    p: "Hikmah Al-Muhyiy: mensyukuri hidup, berbuat baik, dan menjaga ciptaan Allah. Bukan menghamburkan waktu."
+  },
+  {
+    t: "9. Kesadaran bahwa hidup di dunia bersifat sementara dan terbatas adalah hikmah dari...",
+    o: ["A. Al-Qawiyy", "B. Al-Mumīt", "C. Al-Muhyiy", "D. Al-Bā'is"],
+    k: 1,
+    p: "Hikmah Al-Mumīt: menyadari hidup di dunia sementara, menyiapkan diri untuk akhirat dengan rajin beribadah."
+  },
+  {
+    t: "10. Hikmah mempelajari Al-Bā'is mengajarkan kita untuk...",
+    o: ["A. Giat berbuat kebaikan dan segera bertaubat jika salah", "B. Tidak peduli dengan perbuatan baik atau buruk", "C. Hanya mementingkan kesenangan dunia saja", "D. Putus asa mendapatkan kehidupan akhirat yang indah"],
+    k: 0,
+    p: "Hikmah Al-Bā'is: giat berbuat kebaikan karena amal akan dihitung, segera bertaubat, dan menanamkan harapan kehidupan akhirat."
+  }
+];
 
-  const soalList = [
-    { q: "Apa ibukota Indonesia?", o: ["Jakarta", "Bandung", "Surabaya", "Medan"], a: 0 },
-    { q: "Berapa hasil dari 15 + 25?", o: ["30", "35", "40", "45"], a: 2 },
-    { q: "Siapa penemu lampu pijar?", o: ["Newton", "Edison", "Einstein", "Tesla"], a: 1 }
-  ];
+// ==== VARIABEL GLOBAL ====
+var jawabanSiswa = new Array(soalList.length).fill(null);
+var soalAktif = 0;
+var namaSiswa = "";
 
-  let soalAktif = 0;
-  let namaSiswa = "";
-  let jawabanSiswa = new Array(soalList.length).fill(null);
+// ==== URL GOOGLE APPS SCRIPT WEB APP ====
+var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzMJBl1AR2cybR1nH_6hCZYMWKR57mmMWi0c-wWrIyraEsZOb1M0DUPsD1O_j0j38h_/exec";
 
-  function mulaiKuis() {
-    namaSiswa = document.getElementById('namaSiswa').value.trim();
-    if (!namaSiswa) { alert("Mohon isi nama terlebih dahulu!"); return; }
-    
-    document.getElementById('formNama').classList.add('hidden');
-    document.getElementById('areaKuis').classList.remove('hidden');
-    document.getElementById('namaDisplay').textContent = "Halo, " + namaSiswa;
+// ==== FUNGSI ====
+function checkNama() {
+  var input = document.getElementById('namaSiswa').value.trim();
+  var btn = document.getElementById('btnMulai');
+  var pesan = document.getElementById('pesanNama');
+  if (input.length > 0) {
+    btn.disabled = false;
+    btn.style.cursor = 'pointer';
+    btn.style.background = 'var(--accent)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--accent)';
+    pesan.style.color = 'var(--accent)';
+    pesan.textContent = 'Siap! Klik tombol "Mulai Kuis" untuk memulai';
+  } else {
+    btn.disabled = true;
+    btn.style.cursor = 'not-allowed';
+    btn.style.background = 'rgba(128,128,128,.12)';
+    btn.style.color = 'var(--muted)';
+    btn.style.borderColor = 'var(--border)';
+    pesan.style.color = 'var(--muted)';
+    pesan.textContent = 'Isi namamu terlebih dahulu untuk memulai kuis';
+  }
+}
+
+function mulaiKuis() {
+  namaSiswa = document.getElementById('namaSiswa').value.trim();
+  if (!namaSiswa) return;
+  document.getElementById('tampilNama').textContent = namaSiswa;
+  document.getElementById('kuisSection').style.display = 'block';
+  document.getElementById('kuisSection').scrollIntoView({behavior:'smooth',block:'start'});
+  tampilkanSoal();
+}
+
+function tampilkanSoal() {
+  var wadah = document.getElementById('wadahSoal');
+  var soal = soalList[soalAktif];
+  document.getElementById('soalKe').textContent = soalAktif + 1;
+  document.getElementById('progressBar').style.width = ((soalAktif + 1) / soalList.length * 100) + '%';
+
+  var html = '<div class="rounded-2xl p-6" style="background:var(--card);border:1px solid var(--border)">';
+  html += '<p style="color:var(--text);font-size:16px;font-weight:500;margin-bottom:18px;line-height:1.6">' + soal.t + '</p>';
+  html += '<div style="display:flex;flex-direction:column;gap:10px">';
+  for (var i = 0; i < soal.o.length; i++) {
+    var selected = jawabanSiswa[soalAktif] === i ? 'selected' : '';
+    html += '<button class="option-btn ' + selected + '" onclick="pilihJawaban(' + i + ')" style="text-align:left;padding:14px 16px;border-radius:12px;border:2px solid ' + (selected ? '#16a34a' : 'var(--border)') + ';background:' + (selected ? '#dcfce7' : 'var(--bg)') + ';color:var(--text);cursor:pointer;font-family:\'Fredoka\',sans-serif;font-size:14px;line-height:1.5;font-weight:' + (selected ? '700' : '400') + '">' + soal.o[i] + '</button>';
+  }
+  html += '</div></div>';
+  wadah.innerHTML = html;
+
+  document.getElementById('btnPrev').disabled = soalAktif === 0;
+  document.getElementById('btnPrev').style.cursor = soalAktif === 0 ? 'not-allowed' : 'pointer';
+  document.getElementById('btnPrev').style.opacity = soalAktif === 0 ? '0.5' : '1';
+
+  var isLast = soalAktif === soalList.length - 1;
+  document.getElementById('btnNext').style.display = isLast ? 'none' : 'block';
+  document.getElementById('btnKumpul').style.display = isLast ? 'block' : 'none';
+}
+
+function pilihJawaban(idx) {
+  jawabanSiswa[soalAktif] = idx;
+  var btns = document.querySelectorAll('.option-btn');
+  btns.forEach(function(b, i) {
+    if (i === idx) {
+      b.classList.add('selected');
+      b.style.background = '#dcfce7';
+      b.style.borderColor = '#16a34a';
+      b.style.color = '#166534';
+      b.style.fontWeight = '700';
+      b.style.transform = 'scale(1.02)';
+      b.style.boxShadow = '0 4px 12px rgba(22,163,74,.25)';
+    } else {
+      b.classList.remove('selected');
+      b.style.background = 'var(--bg)';
+      b.style.borderColor = 'var(--border)';
+      b.style.color = 'var(--text)';
+      b.style.fontWeight = '400';
+      b.style.transform = '';
+      b.style.boxShadow = '';
+    }
+  });
+}
+
+function soalSebelumnya() {
+  if (soalAktif > 0) {
+    soalAktif--;
     tampilkanSoal();
   }
+}
 
-  function tampilkanSoal() {
-    const soal = soalList[soalAktif];
-    document.getElementById('progressTeks').textContent = `Soal ${soalAktif + 1} dari ${soalList.length}`;
-    document.getElementById('pertanyaanTeks').textContent = soal.q;
-    
-    const container = document.getElementById('pilihanJawaban');
-    container.innerHTML = '';
-    
-    soal.o.forEach((opsi, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'option-btn';
-      btn.textContent = String.fromCharCode(65 + i) + ". " + opsi;
-      
-      if (jawabanSiswa[soalAktif] === i) {
-        btn.classList.add('selected');
-      }
-      
-      btn.onclick = () => pilihJawaban(i);
-      container.appendChild(btn);
-    });
-
-    document.getElementById('btnPrev').disabled = (soalAktif === 0);
-    
-    const isLast = (soalAktif === soalList.length - 1);
-    document.getElementById('btnNext').classList.toggle('hidden', isLast);
-    document.getElementById('btnSelesai').classList.toggle('hidden', !isLast);
-  }
-
-  function pilihJawaban(idx) {
-    jawabanSiswa[soalAktif] = idx;
-    const btns = document.querySelectorAll('.option-btn');
-    
-    btns.forEach((btn, i) => {
-      if (i === idx) {
-        btn.classList.add('selected');
-      } else {
-        btn.classList.remove('selected');
-      }
-    });
-  }
-
-  function navigasi(arah) {
-    soalAktif += arah;
+function soalBerikutnya() {
+  if (soalAktif < soalList.length - 1) {
+    soalAktif++;
     tampilkanSoal();
   }
+}
 
-  function selesaiKuis() {
-    let benar = 0, salah = 0, kosong = 0;
-    jawabanSiswa.forEach((j, i) => {
-      if (j === null) kosong++;
-      else if (j === soalList[i].a) benar++;
-      else salah++;
-    });
-    
-    const nilai = Math.round((benar / soalList.length) * 100);
-    
-    kirimKeSpreadsheet(namaSiswa, nilai, benar, salah, kosong, jawabanSiswa);
+function kumpulkanJawaban() {
+  var benar = 0, salah = 0, kosong = 0;
+  for (var i = 0; i < soalList.length; i++) {
+    if (jawabanSiswa[i] === null) kosong++;
+    else if (jawabanSiswa[i] === soalList[i].k) benar++;
+    else salah++;
   }
+  var nilai = Math.round((benar / soalList.length) * 100);
 
-  function kirimKeSpreadsheet(nama, nilai, benar, salah, kosong, jawaban) {
-    const statusBox = document.getElementById('statusKirim');
-    const statusTeks = document.getElementById('statusTeks');
-    
-    statusBox.classList.remove('hidden');
-    statusBox.style.background = '#fef9c3';
-    statusBox.style.borderColor = '#ca8a04';
-    statusTeks.textContent = '⏳ Sedang mengirim hasil ke guru...';
-    statusTeks.style.color = '#854d0e';
+  document.getElementById('kuisSection').style.display = 'none';
+  document.getElementById('hasilSection').style.display = 'block';
+  document.getElementById('hasilNama').textContent = namaSiswa;
+  document.getElementById('nilaiAkhir').textContent = nilai;
+  document.getElementById('jmlBenar').textContent = benar;
+  document.getElementById('jmlSalah').textContent = salah;
+  document.getElementById('jmlKosong').textContent = kosong;
 
-    const data = {
-      timestamp: new Date().toLocaleString('id-ID'),
-      nama: nama,
-      nilai: nilai,
-      benar: benar,
-      salah: salah,
-      kosong: kosong,
-      detail_jawaban: jawaban.map((j, i) => {
-        if (j === null) return `${i+1}-`;
-        return `${i+1}${String.fromCharCode(65 + j)}`;
-      }).join(', ')
-    };
+  var ket = document.getElementById('keteranganNilai');
+  if (nilai >= 90) { ket.textContent = 'Luar Biasa!'; ket.style.color = 'var(--accent)'; }
+  else if (nilai >= 75) { ket.textContent = 'Bagus! Pertahankan'; ket.style.color = 'var(--accent2)'; }
+  else if (nilai >= 60) { ket.textContent = 'Cukup, perlu belajar lagi'; ket.style.color = '#d97706'; }
+  else { ket.textContent = 'Ayo belajar lebih giat!'; ket.style.color = '#dc2626'; }
 
-    fetch(WEB_APP_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8',
-      },
-      body: JSON.stringify(data)
-    })
-    .then(() => {
-      statusBox.style.background = '#dcfce7';
-      statusBox.style.borderColor = '#16a34a';
-      statusTeks.textContent = `✅ Berhasil! Nilai Anda: ${nilai}. Hasil sudah dikirim ke guru.`;
-      statusTeks.style.color = '#166534';
-      
-      document.getElementById('areaKuis').classList.add('hidden');
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      statusBox.style.background = '#fee2e2';
-      statusBox.style.borderColor = '#dc2626';
-      statusTeks.textContent = '❌ Gagal mengirim. Periksa koneksi internet Anda.';
-      statusTeks.style.color = '#991b1b';
-    });
+  var bahas = document.getElementById('pembahasan');
+  var bahasHtml = '';
+  for (var j = 0; j < soalList.length; j++) {
+    var s = soalList[j];
+    var jw = jawabanSiswa[j];
+    var isBenar = jw === s.k;
+    var warna = jw === null ? 'var(--muted)' : (isBenar ? '#16a34a' : '#dc2626');
+    var status = jw === null ? 'Tidak dijawab' : (isBenar ? 'Benar ✓' : 'Salah ✗');
+    bahasHtml += '<div style="padding:14px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px;background:var(--bg)">';
+    bahasHtml += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px">';
+    bahasHtml += '<p style="color:var(--text);font-weight:500;font-size:14px;line-height:1.5;margin:0;flex:1">' + s.t + '</p>';
+    bahasHtml += '<span style="padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;background:' + (isBenar ? '#dcfce7' : (jw === null ? 'rgba(128,128,128,.12)' : '#fee2e2')) + ';color:' + warna + '">' + status + '</span>';
+    bahasHtml += '</div>';
+    if (jw !== null && !isBenar) {
+      bahasHtml += '<p style="color:#dc2626;font-size:13px;margin:4px 0">Jawabanmu: ' + s.o[jw] + '</p>';
+    }
+    bahasHtml += '<p style="color:#16a34a;font-size:13px;margin:4px 0;font-weight:500">Jawaban benar: ' + s.o[s.k] + '</p>';
+    bahasHtml += '<p style="color:var(--muted);font-size:13px;margin:6px 0 0;line-height:1.5">' + s.p + '</p>';
+    bahasHtml += '</div>';
   }
+  bahas.innerHTML = bahasHtml;
+
+  document.getElementById('hasilSection').scrollIntoView({behavior:'smooth',block:'start'});
+  kirimKeSpreadsheet(namaSiswa, nilai, benar, salah, kosong, jawabanSiswa);
+}
+
+// ==== FUNGSI KIRIM KE SPREADSHEET (SUDAH DIPERBAIKI) ====
+function kirimKeSpreadsheet(nama, nilai, benar, salah, kosong, jawaban) {
+  var statusTeks = document.getElementById('statusTeks');
+  var statusKirim = document.getElementById('statusKirim');
+
+  // Format detail jawaban: 1B, 2A, 3C, 4C, dst
+  var detailJawaban = jawaban.map(function(j, i) {
+    if (j === null) return (i+1) + '-';
+    return (i+1) + String.fromCharCode(65 + j);
+  }).join(', ');
+
+  var data = {
+    timestamp: new Date().toLocaleString('id-ID'),
+    nama: nama,
+    nilai: nilai,
+    benar: benar,
+    salah: salah,
+    kosong: kosong,
+    detail_jawaban: detailJawaban
+  };
+
+  // Kirim menggunakan text/plain agar bisa dibaca oleh Google Apps Script
+  fetch(WEB_APP_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8',
+    },
+    body: JSON.stringify(data)
+  })
+  .then(function() {
+    statusTeks.textContent = '✓ Hasil jawaban berhasil dikirim ke spreadsheet guru!';
+    statusKirim.style.background = '#dcfce7';
+    statusKirim.style.borderColor = '#16a34a';
+    statusTeks.style.color = '#166534';
+  })
+  .catch(function(error) {
+    console.error('Error:', error);
+    statusTeks.textContent = '✗ Gagal mengirim. Periksa koneksi internet atau URL Web App guru.';
+    statusKirim.style.background = '#fee2e2';
+    statusKirim.style.borderColor = '#dc2626';
+    statusTeks.style.color = '#991b1b';
+  });
+}
 </script>
-
-</body>
 </html>
