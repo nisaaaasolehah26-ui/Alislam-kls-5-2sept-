@@ -4,7 +4,7 @@
 <script>
 (function(){
   var s = document.createElement('style');
-  s.textContent = ':root{--bg:#faf9f4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#297a2e;--accent-soft:rgba(41,122,46,.14);--accent2:#d97706;--accent2-soft:rgba(217,119,6,.14);--border:rgba(15,23,42,.08)}.reveal{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}.reveal:nth-child(2){animation-delay:.1s}.reveal:nth-child(3){animation-delay:.2s}.reveal:nth-child(4){animation-delay:.3s}.reveal:nth-child(5){animation-delay:.4s}.reveal:nth-child(6){animation-delay:.5s}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.option-btn{transition:all .25s cubic-bezier(.4,0,.2,1)}.option-btn:hover:not(:disabled){background:var(--accent-soft);border-color:var(--accent)}.option-btn.selected{background:#dcfce7 !important;border-color:#16a34a !important;color:#166534 !important;font-weight:700 !important;transform:scale(1.02);box-shadow:0 4px 12px rgba(22,163,74,.25)}.option-btn:active{transform:scale(.98)}.option-btn.correct{background:#dcfce7;border-color:#16a34a;color:#166534}.option-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}.materi-card{transition:transform .25s ease,box-shadow .25s ease}.materi-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08)}/* Mobile Friendly */@media(max-width:640px){h1{font-size:1.75rem !important}.text-4xl{font-size:1.75rem !important}#nilaiAkhir{font-size:42px !important}.max-w-4xl{padding-left:12px;padding-right:12px}.option-btn{font-size:14px !important;padding:12px 14px !important}.materi-card p{font-size:13px !important}}';
+  s.textContent = ':root{--bg:#faf9f4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#297a2e;--accent-soft:rgba(41,122,46,.14);--accent2:#d97706;--accent2-soft:rgba(217,119,6,.14);--border:rgba(15,23,42,.08)}.reveal{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}.reveal:nth-child(2){animation-delay:.1s}.reveal:nth-child(3){animation-delay:.2s}.reveal:nth-child(4){animation-delay:.3s}.reveal:nth-child(5){animation-delay:.4s}.reveal:nth-child(6){animation-delay:.5s}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}.option-btn{transition:all .25s cubic-bezier(.4,0,.2,1)}.option-btn:hover:not(:disabled){background:var(--accent-soft);border-color:var(--accent)}.option-btn.selected{background:#dcfce7 !important;border-color:#16a34a !important;color:#166534 !important;font-weight:700 !important;transform:scale(1.02);box-shadow:0 4px 12px rgba(22,163,74,.25)}.option-btn:active{transform:scale(.98)}.option-btn.correct{background:#dcfce7;border-color:#16a34a;color:#166534}.option-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}.materi-card{transition:transform .25s ease,box-shadow .25s ease}.materi-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08)}@media(max-width:640px){h1{font-size:1.75rem !important}.text-4xl{font-size:1.75rem !important}#nilaiAkhir{font-size:42px !important}.max-w-4xl{padding-left:12px;padding-right:12px}.option-btn{font-size:14px !important;padding:12px 14px !important}.materi-card p{font-size:13px !important}}';
   document.head.appendChild(s);
 })();
 </script>
@@ -28,7 +28,7 @@
         <p style="color:var(--muted);max-width:560px;margin:0 auto;font-size:15px">Mengenal nama-nama indah Allah SWT, memahami maknanya, dan menghayati hikmah dalam kehidupan sehari-hari</p>
       </div>
 
-      <!-- MATERI PEMBELAJARAN (akan disembunyikan saat kuis dimulai) -->
+      <!-- MATERI PEMBELAJARAN -->
       <div id="materiSection" class="reveal mb-10">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
           <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0">
@@ -163,13 +163,11 @@
         </div>
         
         <div style="display:flex;flex-direction:column;gap:12px">
-          <!-- Input Nama -->
           <div>
             <label style="display:block;color:var(--text);font-weight:500;margin-bottom:8px;font-size:14px">Nama Lengkap</label>
             <input id="namaSiswa" type="text" placeholder="Tuliskan nama lengkapmu..." style="width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Fredoka',sans-serif;font-size:15px;outline:none;box-sizing:border-box" oninput="checkForm()">
           </div>
           
-          <!-- Pilih Kelas (BARU) -->
           <div>
             <label style="display:block;color:var(--text);font-weight:500;margin-bottom:8px;font-size:14px">Kelas</label>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -184,7 +182,6 @@
             </div>
           </div>
           
-          <!-- Tombol Mulai -->
           <button id="btnMulai" onclick="mulaiKuis()" disabled style="width:100%;padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px;cursor:not-allowed;background:rgba(128,128,128,.12);color:var(--muted);border:1px solid var(--border);font-family:'Fredoka',sans-serif;margin-top:8px">
             Mulai Kuis
           </button>
@@ -359,8 +356,8 @@ var soalAktif = 0;
 var namaSiswa = "";
 var kelasSiswa = "";
 
-// ==== URL GOOGLE APPS SCRIPT WEB APP ====
-var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzMJBl1AR2cybR1nH_6hCZYMWKR57mmMWi0c-wWrIyraEsZOb1M0DUPsD1O_j0j38h_/exec";
+// ==== URL GOOGLE APPS SCRIPT WEB APP (SUDAH DIPERBARUI) ====
+var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyCm-CI_m6OiV97_1__LzImSSlSRzqrLvHbWKbnPKtfkxIsgCdGS9X_GTDOGwqJ-U3K/exec";
 
 // ==== FUNGSI ====
 function checkForm() {
@@ -369,7 +366,6 @@ function checkForm() {
   var btn = document.getElementById('btnMulai');
   var pesan = document.getElementById('pesanNama');
   
-  // Update visual radio button
   document.getElementById('label5A').style.borderColor = (kelas && kelas.value === '5A') ? 'var(--accent)' : 'var(--border)';
   document.getElementById('label5A').style.background = (kelas && kelas.value === '5A') ? 'var(--accent-soft)' : 'var(--bg)';
   document.getElementById('label5B').style.borderColor = (kelas && kelas.value === '5B') ? 'var(--accent)' : 'var(--border)';
@@ -526,7 +522,7 @@ function kumpulkanJawaban() {
   kirimKeSpreadsheet(namaSiswa, kelasSiswa, nilai, benar, salah, kosong, jawabanSiswa);
 }
 
-// ==== FUNGSI KIRIM KE SPREADSHEET (dengan data kelas) ====
+// ==== FUNGSI KIRIM KE SPREADSHEET ====
 function kirimKeSpreadsheet(nama, kelas, nilai, benar, salah, kosong, jawaban) {
   var statusTeks = document.getElementById('statusTeks');
   var statusKirim = document.getElementById('statusKirim');
